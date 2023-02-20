@@ -9,6 +9,14 @@
   cursor: pointer;
 }
 
+.loginScreen_logo {
+  position: fixed;
+  left: 0;
+  width: 150px;
+  object-fit: contain;
+  padding-left: 20px;
+}
+
 .loginScreen {
   position: relative;
   background: url("https://assets.nflxext.com/ffe/siteui/vlv3/85e22987-d2dd-46ca-b8b7-65cd0e31c24a/629ae878-26a7-4d88-b12b-af5018a1f7b2/US-en-20201123-popsignuptwoweeks-perspective_alpha_website_large.jpg")
@@ -29,13 +37,6 @@
   );
 }
 
-.loginScreen_logo {
-  position: fixed;
-  left: 0;
-  width: 150px;
-  object-fit: contain;
-  padding-left: 20px;
-}
 
 .loginScreen_body {
   position: absolute;
