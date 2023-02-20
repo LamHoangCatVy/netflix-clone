@@ -3,32 +3,39 @@ import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginScreen from "./screens/LoginScreen";
-import { auth } from "./firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout, selectUser } from "./features/userSlice";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 function App() {
-  const user = null;
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((userAuth) => {
       if (userAuth) {
-        //logged in
-        console.log(userAuth);
+        dispatch(
+          login({
+            uid: userAuth.uid,
+            email: userAuth.email,
+          })
+        );
       } else {
         //logged out
+        dispatch(logout());
       }
     });
-    return unsubscribe
-  });
+    return unsubscribe;
+  }, [dispatch]);
 
   return (
     <div className="app">
       <Router>
-        
         {!user ? (
           <LoginScreen />
         ) : (
           <Routes>
-            
             <Route path="/" element={<HomeScreen />} />
           </Routes>
         )}
